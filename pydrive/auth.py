@@ -469,8 +469,7 @@ class GoogleAuth(ApiAttributeMixin, object):
     if self.credentials.refresh_token is None:
       raise RefreshError('No refresh_token found.'
                          'Please set access_type of OAuth to offline.')
-    if self.http is None:
-      self.http = httplib2.Http(timeout=self.http_timeout)
+    self.http = httplib2.Http(timeout=self.http_timeout)
     try:
       self.credentials.refresh(self.http)
     except AccessTokenRefreshError as error:
